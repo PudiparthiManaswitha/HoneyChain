@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Honey Verification</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8e7;
+        }
+
+        .header {
+            background: #d88900;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 650px;
+            margin: 40px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .success {
+            text-align: center;
+            font-size: 60px;
+            color: #2e7d32;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .authentic {
+            text-align: center;
+            color: #2e7d32;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .details {
+            margin-top: 30px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .label {
+            color: #777;
+        }
+
+        .value {
+            font-weight: bold;
+        }
+
+        .timeline {
+            margin-top: 30px;
+        }
+
+        .event {
+            background: #fff8e7;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .verified {
+            margin-top: 25px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            color: #2e7d32;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 25px auto 0;
+            padding: 12px;
+            background: #d88900;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .back-button:hover {
+            background: #b96f00;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        🐝 Honey Chain
+    </div>
+
+
+    <div class="container">
+
+        <div class="success">
+            ✓
+        </div>
+
+        <h1>AUTHENTIC HONEY</h1>
+
+        <div class="authentic">
+            Honey batch successfully verified
+        </div>
+
+
+        <div class="details">
+
+            <div class="row">
+                <span class="label">Batch ID</span>
+                <span class="value" id="showBatchId"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Beekeeper</span>
+                <span class="value" id="showBeekeeper"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Origin</span>
+                <span class="value" id="showLocation"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Floral Source</span>
+                <span class="value" id="showFloral"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Harvest Date</span>
+                <span class="value" id="showDate"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Quantity</span>
+                <span class="value" id="showQuantity"></span>
+            </div>
+
+
+            <div class="row">
+                <span class="label">Moisture</span>
+                <span class="value" id="showMoisture"></span>
+            </div>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <h2>🌱 Honey Journey</h2>
+
+
+            <div class="event">
+
+                🐝 <b>Harvested</b>
+
+                <br>
+
+                <span id="timelineBeekeeper"></span>
+
+                —
+
+                <span id="timelineLocation"></span>
+
+            </div>
+
+
+            <div class="event">
+
+                🏭 <b>Processed</b>
+
+                <br>
+
+                Honey processing unit
+
+            </div>
+
+
+            <div class="event">
+
+                📦 <b>Packaged</b>
+
+                <br>
+
+                Honey Chain Certified
+
+            </div>
+
+
+            <div class="event">
+
+                🚚 <b>Distributed</b>
+
+                <br>
+
+                Supply Chain Verified
+
+            </div>
+
+        </div>
+
+
+        <div class="verified">
+
+            🔗 Blockchain Record Verified ✓
+
+            <br><br>
+
+            Transaction ID:
+
+            <span id="transactionId"></span>
+
+        </div>
+
+
+        <a href="dashboard.html" class="back-button">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Get batch information from localStorage
+
+        let batchId =
+            localStorage.getItem("batchId");
+
+        let beekeeper =
+            localStorage.getItem("beekeeper");
+
+        let location =
+            localStorage.getItem("location");
+
+        let floral =
+            localStorage.getItem("floral");
+
+        let harvestDate =
+            localStorage.getItem("harvestDate");
+
+        let quantity =
+            localStorage.getItem("quantity");
+
+        let moisture =
+            localStorage.getItem("moisture");
+
+
+        // Display batch information
+
+        document.getElementById("showBatchId").innerText =
+            batchId || "Unknown";
+
+        document.getElementById("showBeekeeper").innerText =
+            beekeeper || "Unknown";
+
+        document.getElementById("showLocation").innerText =
+            location || "Unknown";
+
+        document.getElementById("showFloral").innerText =
+            floral || "Unknown";
+
+        document.getElementById("showDate").innerText =
+            harvestDate || "Unknown";
+
+        document.getElementById("showQuantity").innerText =
+            (quantity || "0") + " kg";
+
+        document.getElementById("showMoisture").innerText =
+            (moisture || "0") + "%";
+
+
+        // Honey journey
+
+        document.getElementById("timelineBeekeeper").innerText =
+            beekeeper || "Unknown";
+
+        document.getElementById("timelineLocation").innerText =
+            location || "Unknown";
+
+
+        // Create a demonstration transaction ID
+
+        let transactionId =
+            "HC" +
+            Date.now().toString().slice(-8);
+
+
+        document.getElementById("transactionId").innerText =
+            transactionId;
+
+    </script>
+
+</body>
+
+</html>

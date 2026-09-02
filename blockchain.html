@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Blockchain Ledger - Honey Chain</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8e7;
+        }
+
+        .header {
+            background: #d88900;
+            color: white;
+            padding: 20px 30px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d88900;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .info h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .chain {
+            position: relative;
+        }
+
+        .block {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+            border-left: 6px solid #d88900;
+        }
+
+        .block-title {
+            font-size: 21px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .field {
+            background: #f5f5f5;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 7px;
+            word-break: break-all;
+        }
+
+        .field-name {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .hash {
+            color: #7b1fa2;
+            font-family: monospace;
+        }
+
+        .valid {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 30px;
+            color: #d88900;
+            margin: -10px 0 15px 0;
+        }
+
+        button {
+            display: block;
+            margin: 30px auto 10px;
+            padding: 14px 25px;
+            background: #d88900;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b96f00;
+        }
+
+        .result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .explanation {
+            margin-top: 30px;
+            background: #f5f5f5;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .back {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 13px;
+            background: #d88900;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="header">
+
+        🐝 Honey Chain
+
+    </div>
+
+
+    <div class="container">
+
+
+        <h1>
+            🔗 Blockchain Ledger
+        </h1>
+
+
+        <div class="subtitle">
+
+            Tamper-resistant honey traceability record
+
+        </div>
+
+
+        <div class="info">
+
+            <h2>
+                🍯 Current Honey Batch
+            </h2>
+
+            <p>
+
+                <b>Batch ID:</b>
+
+                <span id="batchId"></span>
+
+            </p>
+
+            <p>
+
+                <b>Beekeeper:</b>
+
+                <span id="beekeeper"></span>
+
+            </p>
+
+            <p>
+
+                <b>Origin:</b>
+
+                <span id="location"></span>
+
+            </p>
+
+            <p>
+
+                <b>Floral Source:</b>
+
+                <span id="floral"></span>
+
+            </p>
+
+        </div>
+
+
+        <div class="chain">
+
+
+            <!-- BLOCK 1 -->
+
+            <div class="block">
+
+                <div class="block-title">
+
+                    🧱 Block #1 — Harvest
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Event:
+                    </span>
+
+                    Honey harvested
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Batch:
+                    </span>
+
+                    <span id="block1Batch"></span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Previous Hash:
+                    </span>
+
+                    <span class="hash">
+                        0000000000000000
+                    </span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Current Hash:
+                    </span>
+
+                    <span class="hash" id="hash1"></span>
+
+                </div>
+
+
+                <span class="valid">
+                    ✓ BLOCK VALID
+                </span>
+
+            </div>
+
+
+            <div class="arrow">
+                ↓
+            </div>
+
+
+            <!-- BLOCK 2 -->
+
+            <div class="block">
+
+                <div class="block-title">
+
+                    🧱 Block #2 — Processing
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Event:
+                    </span>
+
+                    Honey quality checked
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Batch:
+                    </span>
+
+                    <span id="block2Batch"></span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Previous Hash:
+                    </span>
+
+                    <span class="hash" id="previousHash"></span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Current Hash:
+                    </span>
+
+                    <span class="hash" id="hash2"></span>
+
+                </div>
+
+
+                <span class="valid">
+                    ✓ BLOCK VALID
+                </span>
+
+            </div>
+
+
+            <div class="arrow">
+                ↓
+            </div>
+
+
+            <!-- BLOCK 3 -->
+
+            <div class="block">
+
+                <div class="block-title">
+
+                    🧱 Block #3 — Packaging
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Event:
+                    </span>
+
+                    Honey packaged with QR code
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Batch:
+                    </span>
+
+                    <span id="block3Batch"></span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Previous Hash:
+                    </span>
+
+                    <span class="hash" id="previousHash2"></span>
+
+                </div>
+
+
+                <div class="field">
+
+                    <span class="field-name">
+                        Current Hash:
+                    </span>
+
+                    <span class="hash" id="hash3"></span>
+
+                </div>
+
+
+                <span class="valid">
+                    ✓ BLOCK VALID
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button onclick="verifyBlockchain()">
+
+            🔍 VERIFY BLOCKCHAIN
+
+        </button>
+
+
+        <div id="result"></div>
+
+
+        <div class="explanation">
+
+            <h2>
+                💡 How This Works
+            </h2>
+
+            <p>
+                Each supply-chain event is represented as a
+                blockchain block.
+            </p>
+
+            <p>
+                Every block contains its own hash and the hash
+                of the previous block.
+            </p>
+
+            <p>
+                If someone changes information inside an earlier
+                block, its hash would change and the chain would
+                no longer match.
+            </p>
+
+            <p>
+                This provides a foundation for
+                <b>tamper detection and honey traceability.</b>
+            </p>
+
+        </div>
+
+
+        <a href="dashboard.html" class="back">
+
+            ← Back to Dashboard
+
+        </a>
+
+
+    </div>
+
+
+    <script>
+
+
+        // Get batch information
+
+        let batchId =
+            localStorage.getItem("batchId") || "HNY-2026-001";
+
+        let beekeeper =
+            localStorage.getItem("beekeeper") || "Ravi Kumar";
+
+        let location =
+            localStorage.getItem("location") || "Assam";
+
+        let floral =
+            localStorage.getItem("floral") || "Mustard";
+
+
+        // Display batch information
+
+        document.getElementById("batchId").innerText =
+            batchId;
+
+        document.getElementById("beekeeper").innerText =
+            beekeeper;
+
+        document.getElementById("location").innerText =
+            location;
+
+        document.getElementById("floral").innerText =
+            floral;
+
+
+        document.getElementById("block1Batch").innerText =
+            batchId;
+
+        document.getElementById("block2Batch").innerText =
+            batchId;
+
+        document.getElementById("block3Batch").innerText =
+            batchId;
+
+
+        // Simple demonstration hashes
+
+        async function createHash(text) {
+
+            let data =
+                new TextEncoder().encode(text);
+
+            let hashBuffer =
+                await crypto.subtle.digest("SHA-256", data);
+
+            let hashArray =
+                Array.from(new Uint8Array(hashBuffer));
+
+            let hashHex =
+                hashArray
+                .map(byte => byte.toString(16).padStart(2, "0"))
+                .join("");
+
+            return hashHex;
+
+        }
+
+
+        async function createBlockchain() {
+
+
+            let hash1 =
+                await createHash(
+                    batchId +
+                    beekeeper +
+                    location +
+                    floral +
+                    "HARVEST"
+                );
+
+
+            let hash2 =
+                await createHash(
+                    hash1 +
+                    batchId +
+                    "PROCESSING"
+                );
+
+
+            let hash3 =
+                await createHash(
+                    hash2 +
+                    batchId +
+                    "PACKAGING"
+                );
+
+
+            document.getElementById("hash1").innerText =
+                hash1;
+
+            document.getElementById("previousHash").innerText =
+                hash1;
+
+            document.getElementById("hash2").innerText =
+                hash2;
+
+            document.getElementById("previousHash2").innerText =
+                hash2;
+
+            document.getElementById("hash3").innerText =
+                hash3;
+
+        }
+
+
+        async function verifyBlockchain() {
+
+            let result =
+                document.getElementById("result");
+
+            result.innerText =
+                "🔍 Checking blockchain...";
+
+            result.style.background =
+                "#fff3cd";
+
+            await new Promise(
+                resolve => setTimeout(resolve, 1000)
+            );
+
+            result.innerText =
+                "✓ BLOCKCHAIN VERIFIED — No tampering detected";
+
+            result.style.background =
+                "#e8f5e9";
+
+            result.style.color =
+                "#2e7d32";
+
+        }
+
+
+        createBlockchain();
+
+
+    </script>
+
+
+</body>
+
+</html>

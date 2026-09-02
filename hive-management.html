@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Hive Management - Honey Chain</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8e7;
+        }
+
+        .header {
+            background: #d88900;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #d88900;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .summary {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #d88900;
+        }
+
+        .summary-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .hives {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .hive {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .hive-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .health {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .sensor {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: #fff8e7;
+            margin-top: 8px;
+            border-radius: 7px;
+        }
+
+        .sensor-name {
+            color: #666;
+        }
+
+        .sensor-value {
+            font-weight: bold;
+        }
+
+        .alert {
+            margin-top: 12px;
+            padding: 10px;
+            background: #fff3cd;
+            color: #856404;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .actions {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 25px;
+            margin: 5px;
+            background: #d88900;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #b96f00;
+        }
+
+        .info-box {
+            margin-top: 35px;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #d88900;
+        }
+
+        @media (max-width: 750px) {
+
+            .hives {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        🐝 Honey Chain
+    </div>
+
+
+    <div class="container">
+
+        <h1>🍯 Smart Hive Management</h1>
+
+        <div class="subtitle">
+            Monitor hive conditions and beekeeping activities
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <div class="summary-number">
+                    12
+                </div>
+
+                <div class="summary-label">
+                    Total Hives
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-number">
+                    10
+                </div>
+
+                <div class="summary-label">
+                    Healthy Hives
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-number">
+                    245 kg
+                </div>
+
+                <div class="summary-label">
+                    Honey Produced
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-number">
+                    2
+                </div>
+
+                <div class="summary-label">
+                    Need Attention
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HIVE CARDS -->
+
+        <div class="hives">
+
+
+            <!-- HIVE 01 -->
+
+            <div class="hive">
+
+                <div class="hive-title">
+                    🐝 Hive H-001
+                </div>
+
+                <div class="health">
+                    ✓ HEALTHY
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🌡 Temperature
+                    </span>
+
+                    <span class="sensor-value">
+                        34°C
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        💧 Humidity
+                    </span>
+
+                    <span class="sensor-value">
+                        62%
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🍯 Honey Production
+                    </span>
+
+                    <span class="sensor-value">
+                        24 kg
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🐝 Bee Population
+                    </span>
+
+                    <span class="sensor-value">
+                        Normal
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- HIVE 02 -->
+
+            <div class="hive">
+
+                <div class="hive-title">
+                    🐝 Hive H-002
+                </div>
+
+                <div class="health">
+                    ✓ HEALTHY
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🌡 Temperature
+                    </span>
+
+                    <span class="sensor-value">
+                        35°C
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        💧 Humidity
+                    </span>
+
+                    <span class="sensor-value">
+                        64%
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🍯 Honey Production
+                    </span>
+
+                    <span class="sensor-value">
+                        21 kg
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🐝 Bee Population
+                    </span>
+
+                    <span class="sensor-value">
+                        Normal
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- HIVE 03 -->
+
+            <div class="hive">
+
+                <div class="hive-title">
+                    🐝 Hive H-003
+                </div>
+
+                <div class="health">
+                    ✓ HEALTHY
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🌡 Temperature
+                    </span>
+
+                    <span class="sensor-value">
+                        33°C
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        💧 Humidity
+                    </span>
+
+                    <span class="sensor-value">
+                        60%
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🍯 Honey Production
+                    </span>
+
+                    <span class="sensor-value">
+                        27 kg
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🐝 Bee Population
+                    </span>
+
+                    <span class="sensor-value">
+                        Normal
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- HIVE 04 -->
+
+            <div class="hive">
+
+                <div class="hive-title">
+                    🐝 Hive H-004
+                </div>
+
+                <div class="health">
+                    ⚠ NEEDS ATTENTION
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🌡 Temperature
+                    </span>
+
+                    <span class="sensor-value">
+                        39°C
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        💧 Humidity
+                    </span>
+
+                    <span class="sensor-value">
+                        72%
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🍯 Honey Production
+                    </span>
+
+                    <span class="sensor-value">
+                        12 kg
+                    </span>
+
+                </div>
+
+
+                <div class="sensor">
+
+                    <span class="sensor-name">
+                        🐝 Bee Population
+                    </span>
+
+                    <span class="sensor-value">
+                        Low
+                    </span>
+
+                </div>
+
+
+                <div class="alert">
+
+                    ⚠ Alert: Hive conditions require beekeeper attention.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-box">
+
+            <h2>📡 Smart Monitoring</h2>
+
+            <p>
+                Honey Chain can collect sensor information from
+                connected hive monitoring devices.
+            </p>
+
+            <p>
+                Temperature, humidity and hive activity can be
+                monitored to help beekeepers identify unusual
+                conditions early.
+            </p>
+
+            <p>
+                ⚡ Future integration: IoT sensors → Cloud →
+                Honey Chain dashboard
+            </p>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="actions">
+
+            <a href="dashboard.html" class="button">
+                ← Dashboard
+            </a>
+
+            <a href="create-batch.html" class="button">
+                + Create Honey Batch
+            </a>
+
+            <a href="supply-chain.html" class="button">
+                🌱 Supply Chain
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

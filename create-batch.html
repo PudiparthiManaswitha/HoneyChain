@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Honey Chain - Create Batch</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 800px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-bottom: 8px;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #f59e0b;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #d97706;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .info {
+            margin-top: 25px;
+            background: #fff7ed;
+            padding: 18px;
+            border-radius: 10px;
+            color: #92400e;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 20px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🐝 Honey Chain</h1>
+
+</header>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>🍯 Create Honey Batch</h2>
+
+        <p class="subtitle">
+            Register a new honey batch and create a digital
+            traceability record.
+        </p>
+
+
+        <form id="batchForm">
+
+
+            <!-- BATCH ID -->
+
+            <div class="form-group">
+
+                <label for="batchId">
+                    Batch ID
+                </label>
+
+                <input
+                    type="text"
+                    id="batchId"
+                    placeholder="Example: HNY-2026-001"
+                    required
+                >
+
+                <p class="hint">
+                    Enter a unique identification number for this honey batch.
+                </p>
+
+            </div>
+
+
+            <!-- BEEKEEPER -->
+
+            <div class="form-group">
+
+                <label for="beekeeper">
+                    Beekeeper Name
+                </label>
+
+                <input
+                    type="text"
+                    id="beekeeper"
+                    placeholder="Enter beekeeper name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Example: Assam"
+                    required
+                >
+
+            </div>
+
+
+            <!-- FLORAL SOURCE -->
+
+            <div class="form-group">
+
+                <label for="floral">
+                    Floral Source
+                </label>
+
+                <input
+                    type="text"
+                    id="floral"
+                    placeholder="Example: Mustard"
+                    required
+                >
+
+            </div>
+
+
+            <!-- HARVEST DATE -->
+
+            <div class="form-group">
+
+                <label for="harvestDate">
+                    Harvest Date
+                </label>
+
+                <input
+                    type="date"
+                    id="harvestDate"
+                    required
+                >
+
+            </div>
+
+
+            <!-- QUANTITY -->
+
+            <div class="form-group">
+
+                <label for="quantity">
+                    Quantity (kg)
+                </label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    placeholder="Example: 50"
+                    min="1"
+                    step="0.1"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MOISTURE -->
+
+            <div class="form-group">
+
+                <label for="moisture">
+                    Moisture (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="moisture"
+                    placeholder="Example: 18"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                🍯 Create Honey Batch
+            </button>
+
+
+        </form>
+
+
+        <div class="info">
+
+            <strong>🔐 What happens next?</strong>
+
+            <br>
+
+            Your batch information will be stored,
+            a batch record will be created, and you will
+            receive a QR code that consumers can scan
+            to verify the honey.
+
+        </div>
+
+
+        <a class="back" href="dashboard.html">
+            ← Back to Dashboard
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    document
+        .getElementById("batchForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            /*
+             * Get information entered by the beekeeper.
+             */
+
+            const batchId =
+                document.getElementById("batchId").value.trim();
+
+            const beekeeper =
+                document.getElementById("beekeeper").value.trim();
+
+            const location =
+                document.getElementById("location").value.trim();
+
+            const floral =
+                document.getElementById("floral").value.trim();
+
+            const harvestDate =
+                document.getElementById("harvestDate").value;
+
+            const quantity =
+                document.getElementById("quantity").value;
+
+            const moisture =
+                document.getElementById("moisture").value;
+
+
+            /*
+             * Save batch information in the browser.
+             */
+
+            localStorage.setItem("batchId", batchId);
+
+            localStorage.setItem("beekeeper", beekeeper);
+
+            localStorage.setItem("location", location);
+
+            localStorage.setItem("floral", floral);
+
+            localStorage.setItem("harvestDate", harvestDate);
+
+            localStorage.setItem("quantity", quantity);
+
+            localStorage.setItem("moisture", moisture);
+
+
+            /*
+             * Open the batch details page.
+             */
+
+            window.location.href = "batch.html";
+
+        });
+
+</script>
+
+
+</body>
+
+</html>

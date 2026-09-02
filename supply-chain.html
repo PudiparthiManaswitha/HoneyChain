@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Honey Supply Chain</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8e7;
+        }
+
+        .header {
+            background: #d88900;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 850px;
+            margin: 40px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d88900;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .batch-info {
+            background: #fff8e7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 35px;
+        }
+
+        .batch-info h2 {
+            margin-top: 0;
+            color: #d88900;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #d88900;
+        }
+
+        .step {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: #d88900;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            z-index: 1;
+        }
+
+        .step-content {
+            margin-left: 25px;
+            background: #fff8e7;
+            padding: 18px;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .step-content h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .step-content p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .blockchain {
+            margin-top: 35px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            border-left: 5px solid #d88900;
+        }
+
+        .blockchain h2 {
+            margin-top: 0;
+        }
+
+        .transaction {
+            background: white;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 7px;
+            word-break: break-all;
+        }
+
+        .back-button {
+            display: block;
+            width: 220px;
+            margin: 30px auto 0;
+            padding: 13px;
+            background: #d88900;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #b96f00;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        🐝 Honey Chain
+    </div>
+
+
+    <div class="container">
+
+        <h1>🌱 Honey Supply Chain</h1>
+
+        <div class="subtitle">
+            Track the complete journey of your honey
+        </div>
+
+
+        <!-- BATCH INFORMATION -->
+
+        <div class="batch-info">
+
+            <h2>🍯 Batch Information</h2>
+
+            <p>
+                <b>Batch ID:</b>
+                <span id="batchId"></span>
+            </p>
+
+            <p>
+                <b>Beekeeper:</b>
+                <span id="beekeeper"></span>
+            </p>
+
+            <p>
+                <b>Origin:</b>
+                <span id="location"></span>
+            </p>
+
+            <p>
+                <b>Floral Source:</b>
+                <span id="floral"></span>
+            </p>
+
+        </div>
+
+
+        <!-- SUPPLY CHAIN TIMELINE -->
+
+        <div class="timeline">
+
+
+            <!-- STEP 1 -->
+
+            <div class="step">
+
+                <div class="icon">
+                    🐝
+                </div>
+
+                <div class="step-content">
+
+                    <h3>1. Honey Harvested</h3>
+
+                    <p>
+                        <b>Beekeeper:</b>
+                        <span id="harvestBeekeeper"></span>
+                    </p>
+
+                    <p>
+                        <b>Location:</b>
+                        <span id="harvestLocation"></span>
+                    </p>
+
+                    <p>
+                        Honey collected from registered beehives.
+                    </p>
+
+                    <span class="status">
+                        ✓ VERIFIED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step">
+
+                <div class="icon">
+                    🏭
+                </div>
+
+                <div class="step-content">
+
+                    <h3>2. Processing</h3>
+
+                    <p>
+                        Honey received at the processing facility.
+                    </p>
+
+                    <p>
+                        Quality checks performed.
+                    </p>
+
+                    <p>
+                        Moisture level and purity recorded.
+                    </p>
+
+                    <span class="status">
+                        ✓ QUALITY CHECKED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step">
+
+                <div class="icon">
+                    📦
+                </div>
+
+                <div class="step-content">
+
+                    <h3>3. Packaging</h3>
+
+                    <p>
+                        Honey packed into certified containers.
+                    </p>
+
+                    <p>
+                        QR code generated for traceability.
+                    </p>
+
+                    <span class="status">
+                        ✓ PACKAGED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="step">
+
+                <div class="icon">
+                    🚚
+                </div>
+
+                <div class="step-content">
+
+                    <h3>4. Distribution</h3>
+
+                    <p>
+                        Honey transported through the verified supply chain.
+                    </p>
+
+                    <p>
+                        Distribution record maintained.
+                    </p>
+
+                    <span class="status">
+                        ✓ VERIFIED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 5 -->
+
+            <div class="step">
+
+                <div class="icon">
+                    🛒
+                </div>
+
+                <div class="step-content">
+
+                    <h3>5. Consumer</h3>
+
+                    <p>
+                        Consumer scans the QR code on the honey package.
+                    </p>
+
+                    <p>
+                        Complete honey journey becomes visible.
+                    </p>
+
+                    <span class="status">
+                        ✓ TRACEABLE
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BLOCKCHAIN -->
+
+        <div class="blockchain">
+
+            <h2>🔗 Blockchain Record</h2>
+
+            <p>
+                Each supply-chain event is intended to be recorded
+                as a tamper-resistant blockchain transaction.
+            </p>
+
+            <div class="transaction">
+
+                <b>Batch ID:</b>
+                <span id="blockBatch"></span>
+
+                <br><br>
+
+                <b>Transaction ID:</b>
+                HC2026A83F91
+
+                <br><br>
+
+                <b>Status:</b>
+                ✓ Record Verified
+
+            </div>
+
+        </div>
+
+
+        <a href="dashboard.html" class="back-button">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Get saved batch information
+
+        let batchId =
+            localStorage.getItem("batchId");
+
+        let beekeeper =
+            localStorage.getItem("beekeeper");
+
+        let location =
+            localStorage.getItem("location");
+
+        let floral =
+            localStorage.getItem("floral");
+
+
+        // Display batch information
+
+        document.getElementById("batchId").innerText =
+            batchId || "Unknown";
+
+        document.getElementById("beekeeper").innerText =
+            beekeeper || "Unknown";
+
+        document.getElementById("location").innerText =
+            location || "Unknown";
+
+        document.getElementById("floral").innerText =
+            floral || "Unknown";
+
+
+        // Display harvest information
+
+        document.getElementById("harvestBeekeeper").innerText =
+            beekeeper || "Unknown";
+
+        document.getElementById("harvestLocation").innerText =
+            location || "Unknown";
+
+
+        // Display blockchain batch ID
+
+        document.getElementById("blockBatch").innerText =
+            batchId || "Unknown";
+
+    </script>
+
+</body>
+
+</html>
