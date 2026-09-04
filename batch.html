@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Honey Chain - Verify Honey</title>
+
+    <title>Honey Chain - Batch Details</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,64 +23,28 @@
         header {
             background: #1f2937;
             color: white;
-            padding: 18px 40px;
+            padding: 20px 40px;
         }
 
         header h1 {
-            font-size: 25px;
+            font-size: 26px;
         }
 
         .container {
             width: 92%;
-            max-width: 850px;
+            max-width: 900px;
             margin: 30px auto;
-        }
-
-        .title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .title h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .title p {
-            color: #666;
-        }
-
-        .verified-box {
-            background: #dcfce7;
-            border: 2px solid #22c55e;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .verified-box .check {
-            font-size: 45px;
-        }
-
-        .verified-box h2 {
-            color: #15803d;
-            margin: 8px 0;
-        }
-
-        .verified-box p {
-            color: #166534;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 28px;
+            border-radius: 14px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
         }
 
-        .card h2 {
+        h2 {
             margin-bottom: 20px;
         }
 
@@ -98,48 +64,34 @@
             display: block;
             color: #777;
             font-size: 13px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .detail span {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
         }
 
-        .journey {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .step {
-            flex: 1;
+        .qr-section {
             text-align: center;
-            position: relative;
         }
 
-        .circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #22c55e;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 8px;
-            font-weight: bold;
+        .qr-section img {
+            width: 220px;
+            height: 220px;
+            display: block;
+            margin: 20px auto;
+            border: 8px solid white;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
         }
 
-        .step h3 {
-            font-size: 14px;
-        }
-
-        .step p {
-            font-size: 12px;
-            color: #777;
-            margin-top: 4px;
+        .scan-note {
+            background: #fff7ed;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.5;
         }
 
         .blockchain {
@@ -152,22 +104,18 @@
             line-height: 1.6;
         }
 
-        .hash {
+        .transaction {
+            margin-top: 15px;
             background: #1f2937;
             padding: 14px;
             border-radius: 8px;
-            margin-top: 15px;
             font-family: monospace;
-            word-break: break-all;
-            color: #e5e7eb;
         }
 
         .buttons {
             display: flex;
-            justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 20px;
         }
 
         .button {
@@ -186,29 +134,16 @@
 
         .error {
             background: #fee2e2;
-            border: 2px solid #ef4444;
+            color: #991b1b;
             padding: 25px;
             border-radius: 12px;
             text-align: center;
         }
 
-        .error h2 {
-            color: #b91c1c;
-            margin-bottom: 10px;
-        }
-
-        .error p {
-            color: #7f1d1d;
-        }
-
         @media (max-width: 650px) {
+
             .details {
                 grid-template-columns: 1fr;
-            }
-
-            .journey {
-                flex-direction: column;
-                gap: 18px;
             }
 
             .container {
@@ -216,137 +151,180 @@
             }
 
             header {
-                padding: 15px 20px;
+                padding: 18px 20px;
             }
+
+            .card {
+                padding: 20px;
+            }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
 <header>
+
     <h1>🐝 Honey Chain</h1>
+
 </header>
 
-<div class="container">
 
-    <div class="title">
-        <h2>🍯 Honey Verification</h2>
-        <p>Blockchain-based honey traceability</p>
-    </div>
+<div class="container">
 
     <div id="content"></div>
 
 </div>
 
+
 <script>
 
-    /*
-     * First try to read information from the QR code URL.
-     * This allows verification on ANY phone.
-     */
+    /* Get batch information */
 
-    const params = new URLSearchParams(window.location.search);
+    const batchId = localStorage.getItem("batchId");
+    const beekeeper = localStorage.getItem("beekeeper");
+    const location = localStorage.getItem("location");
+    const floral = localStorage.getItem("floral");
+    const harvestDate = localStorage.getItem("harvestDate");
+    const quantity = localStorage.getItem("quantity");
+    const moisture = localStorage.getItem("moisture");
 
-    let batchId = params.get("batchId");
-    let beekeeper = params.get("beekeeper");
-    let location = params.get("location");
-    let floral = params.get("floral");
-    let harvestDate = params.get("harvestDate");
-    let quantity = params.get("quantity");
-    let moisture = params.get("moisture");
-
-    /*
-     * If the page was opened normally on the same computer,
-     * use localStorage as a backup.
-     */
-
-    if (!batchId) {
-        batchId = localStorage.getItem("batchId");
-        beekeeper = localStorage.getItem("beekeeper");
-        location = localStorage.getItem("location");
-        floral = localStorage.getItem("floral");
-        harvestDate = localStorage.getItem("harvestDate");
-        quantity = localStorage.getItem("quantity");
-        moisture = localStorage.getItem("moisture");
-    }
 
     const content = document.getElementById("content");
 
+
+    /* Check whether a batch exists */
+
     if (!batchId) {
 
         content.innerHTML = `
+
             <div class="error">
-                <h2>❌ Batch Not Found</h2>
+
+                <h2>❌ No Batch Found</h2>
+
                 <p>
-                    No honey batch information was found.
-                    Please scan a valid Honey Chain QR code.
+                    Please create a honey batch first.
                 </p>
 
-                <div class="buttons">
-                    <a class="button" href="dashboard.html">
-                        ← Dashboard
-                    </a>
-                </div>
+                <br>
+
+                <a class="button" href="create-batch.html">
+                    Create Batch
+                </a>
+
             </div>
+
         `;
 
-    } else {
+    }
+
+    else {
+
+        /*
+         * Create the online verification URL.
+         */
+
+        const verifyURL =
+            "https://aayushkumarjha67.github.io/HoneyChain/verify.html" +
+
+            "?batchId=" + encodeURIComponent(batchId) +
+
+            "&beekeeper=" + encodeURIComponent(beekeeper || "") +
+
+            "&location=" + encodeURIComponent(location || "") +
+
+            "&floral=" + encodeURIComponent(floral || "") +
+
+            "&harvestDate=" + encodeURIComponent(harvestDate || "") +
+
+            "&quantity=" + encodeURIComponent(quantity || "") +
+
+            "&moisture=" + encodeURIComponent(moisture || "");
+
+
+        /*
+         * QR code image.
+         * No JavaScript QR library is required.
+         */
+
+        const qrURL =
+            "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+            encodeURIComponent(verifyURL);
+
 
         content.innerHTML = `
 
-            <div class="verified-box">
-
-                <div class="check">✓</div>
-
-                <h2>HONEY VERIFIED</h2>
-
-                <p>
-                    This batch has a valid Honey Chain traceability record.
-                </p>
-
-            </div>
-
-
             <div class="card">
 
-                <h2>📦 Batch Information</h2>
+                <h2>🍯 Honey Batch Details</h2>
+
 
                 <div class="details">
 
                     <div class="detail">
+
                         <strong>Batch ID</strong>
+
                         <span>${batchId}</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Beekeeper</strong>
+
                         <span>${beekeeper || "Not available"}</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Origin</strong>
+
                         <span>${location || "Not available"}</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Floral Source</strong>
+
                         <span>${floral || "Not available"}</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Harvest Date</strong>
+
                         <span>${harvestDate || "Not available"}</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Quantity</strong>
+
                         <span>${quantity || "Not available"} kg</span>
+
                     </div>
 
+
                     <div class="detail">
+
                         <strong>Moisture</strong>
+
                         <span>${moisture || "Not available"}%</span>
+
                     </div>
 
                 </div>
@@ -354,35 +332,33 @@
             </div>
 
 
-            <div class="card">
+            <div class="card qr-section">
 
-                <h2>🌱 Honey Journey</h2>
+                <h2>📱 Scan to Verify Honey</h2>
 
-                <div class="journey">
+                <p>
+                    Scan this QR code with a smartphone.
+                </p>
 
-                    <div class="step">
-                        <div class="circle">1</div>
-                        <h3>Harvested</h3>
-                        <p>Hive</p>
-                    </div>
 
-                    <div class="step">
-                        <div class="circle">2</div>
-                        <h3>Processed</h3>
-                        <p>Processing Unit</p>
-                    </div>
+                <img
+                    src="${qrURL}"
+                    alt="Honey Chain QR Code"
+                >
 
-                    <div class="step">
-                        <div class="circle">3</div>
-                        <h3>Packaged</h3>
-                        <p>Packaging</p>
-                    </div>
 
-                    <div class="step">
-                        <div class="circle">4</div>
-                        <h3>Distributed</h3>
-                        <p>Market</p>
-                    </div>
+                <p>
+
+                    <strong>Batch:</strong>
+                    ${batchId}
+
+                </p>
+
+
+                <div class="scan-note">
+
+                    📱 Scanning this QR code opens the
+                    online Honey Chain verification page.
 
                 </div>
 
@@ -394,13 +370,20 @@
                 <h2>🔗 Blockchain Record</h2>
 
                 <p>
-                    The batch is linked to a cryptographic hash-chain
-                    record. Changes to linked records can be detected
+
+                    This batch is linked to a
+                    cryptographic hash-chain record.
+                    Changes to linked records can be detected
                     through hash verification.
+
                 </p>
 
-                <div class="hash">
-                    Transaction ID: HC2026A83F91
+
+                <div class="transaction">
+
+                    Transaction ID:
+                    HC2026A83F91
+
                 </div>
 
             </div>
@@ -412,9 +395,11 @@
                     ← Dashboard
                 </a>
 
+
                 <a class="button" href="supply-chain.html">
                     🌱 Supply Chain
                 </a>
+
 
                 <a class="button" href="blockchain.html">
                     🔗 Blockchain
@@ -423,6 +408,7 @@
             </div>
 
         `;
+
     }
 
 </script>
