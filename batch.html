@@ -1,47 +1,49 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-    <title>Honey Batch Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Chain - Batch Details</title>
 
     <style>
-
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
-            background: #fff8e7;
         }
 
-        .header {
-            background: #d88900;
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #1f2937;
             color: white;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
+            padding: 18px 40px;
+        }
+
+        header h1 {
+            font-size: 25px;
         }
 
         .container {
-            width: 700px;
-            margin: 35px auto;
+            width: 92%;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+
+        .card {
             background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-        }
-
-        h1 {
-            color: #d88900;
-        }
-
-        .verified {
-            display: inline-block;
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
         }
 
         .details {
@@ -51,197 +53,271 @@
         }
 
         .detail {
-            background: #fff8e7;
+            background: #f9fafb;
             padding: 15px;
             border-radius: 8px;
         }
 
-        .label {
-            font-size: 13px;
+        .detail strong {
+            display: block;
             color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
         }
 
-        .value {
+        .detail span {
             font-size: 17px;
             font-weight: bold;
-            margin-top: 5px;
         }
 
-        .blockchain {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
-        }
-
-        .qr {
-            margin-top: 25px;
+        .qr-section {
             text-align: center;
         }
 
-        .qr img {
-            width: 180px;
-            height: 180px;
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            display: block;
             border: 5px solid white;
-
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-    </style>
+        .qr-section p {
+            color: #666;
+            margin-bottom: 8px;
+        }
 
+        .scan-note {
+            background: #fff7ed;
+            padding: 14px;
+            border-radius: 8px;
+            color: #92400e;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .blockchain {
+            background: #111827;
+            color: white;
+        }
+
+        .blockchain p {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        .transaction {
+            margin-top: 15px;
+            background: #1f2937;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            background: #f59e0b;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #d97706;
+        }
+
+        .error {
+            text-align: center;
+            color: #b91c1c;
+            background: #fee2e2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 650px) {
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="header">
-        🐝 Honey Chain
-    </div>
+<header>
+    <h1>🐝 Honey Chain</h1>
+</header>
 
+<div class="container">
 
-    <div class="container">
+    <div id="content"></div>
 
-        <h1>Honey Batch Details</h1>
+</div>
 
-        <div class="verified">
-            ✓ BATCH VERIFIED
-        </div>
+<script>
 
+    const batchId = localStorage.getItem("batchId");
+    const beekeeper = localStorage.getItem("beekeeper");
+    const location = localStorage.getItem("location");
+    const floral = localStorage.getItem("floral");
+    const harvestDate = localStorage.getItem("harvestDate");
+    const quantity = localStorage.getItem("quantity");
+    const moisture = localStorage.getItem("moisture");
 
-        <div class="details">
+    const content = document.getElementById("content");
 
-            <div class="detail">
-                <div class="label">Batch ID</div>
-                <div class="value" id="showBatchId"></div>
+    if (!batchId) {
+
+        content.innerHTML = `
+            <div class="error">
+                <h2>No Batch Found</h2>
+                <p>Please create a honey batch first.</p>
+                <div class="buttons">
+                    <a class="button" href="create-batch.html">Create Batch</a>
+                    <a class="button" href="dashboard.html">Dashboard</a>
+                </div>
+            </div>
+        `;
+
+    } else {
+
+        /*
+         * IMPORTANT:
+         * This URL points to the ONLINE Honey Chain website.
+         * The verification page will read the batch information
+         * directly from the QR code URL.
+         */
+
+        const verifyURL =
+            "https://aayushkumarjha67.github.io/HoneyChain/verify.html" +
+            "?batchId=" + encodeURIComponent(batchId) +
+            "&beekeeper=" + encodeURIComponent(beekeeper || "") +
+            "&location=" + encodeURIComponent(location || "") +
+            "&floral=" + encodeURIComponent(floral || "") +
+            "&harvestDate=" + encodeURIComponent(harvestDate || "") +
+            "&quantity=" + encodeURIComponent(quantity || "") +
+            "&moisture=" + encodeURIComponent(moisture || "");
+
+        const qrURL =
+            "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+            encodeURIComponent(verifyURL);
+
+        content.innerHTML = `
+
+            <div class="card">
+
+                <h2>🍯 Honey Batch Details</h2>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <strong>Batch ID</strong>
+                        <span>${batchId}</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Beekeeper</strong>
+                        <span>${beekeeper || "Not available"}</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Origin</strong>
+                        <span>${location || "Not available"}</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Floral Source</strong>
+                        <span>${floral || "Not available"}</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Harvest Date</strong>
+                        <span>${harvestDate || "Not available"}</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Quantity</strong>
+                        <span>${quantity || "Not available"} kg</span>
+                    </div>
+
+                    <div class="detail">
+                        <strong>Moisture</strong>
+                        <span>${moisture || "Not available"}%</span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="detail">
-                <div class="label">Beekeeper</div>
-                <div class="value" id="showBeekeeper"></div>
+            <div class="card qr-section">
+
+                <h2>📱 Scan to Verify Honey</h2>
+
+                <p>Scan this QR code using a smartphone.</p>
+
+                <img src="${qrURL}" alt="Honey Batch QR Code">
+
+                <p><strong>Batch:</strong> ${batchId}</p>
+
+                <div class="scan-note">
+                    📱 The QR code opens the online Honey Chain
+                    verification page.
+                </div>
+
             </div>
 
-            <div class="detail">
-                <div class="label">Location</div>
-                <div class="value" id="showLocation"></div>
+            <div class="card blockchain">
+
+                <h2>🔗 Blockchain Record</h2>
+
+                <p>
+                    This honey batch is associated with a
+                    tamper-evident blockchain hash-chain record.
+                </p>
+
+                <div class="transaction">
+                    Transaction ID: HC2026A83F91
+                </div>
+
             </div>
 
-            <div class="detail">
-                <div class="label">Floral Source</div>
-                <div class="value" id="showFloral"></div>
+            <div class="buttons">
+
+                <a class="button" href="dashboard.html">
+                    ← Dashboard
+                </a>
+
+                <a class="button" href="supply-chain.html">
+                    🌱 Supply Chain
+                </a>
+
+                <a class="button" href="blockchain.html">
+                    🔗 Blockchain Ledger
+                </a>
+
             </div>
+        `;
+    }
 
-            <div class="detail">
-                <div class="label">Harvest Date</div>
-                <div class="value" id="showDate"></div>
-            </div>
-
-            <div class="detail">
-                <div class="label">Quantity</div>
-                <div class="value" id="showQuantity"></div>
-            </div>
-
-            <div class="detail">
-                <div class="label">Moisture</div>
-                <div class="value" id="showMoisture"></div>
-            </div>
-
-            <div class="detail">
-                <div class="label">Status</div>
-                <div class="value">Verified</div>
-            </div>
-
-        </div>
-
-
-        <div class="blockchain">
-
-            <h3>🔗 Blockchain Record</h3>
-
-            <p>✓ Batch recorded on blockchain</p>
-
-            <p>
-                Transaction ID:
-                <b>HC2026A83F91</b>
-            </p>
-
-            <p>
-                Record Status:
-                <b>Immutable ✓</b>
-            </p>
-
-        </div>
-
-
-        <div class="qr">
-
-            <h3>📱 Scan to Verify</h3>
-
-            <img id="qrImage" alt="Honey Batch QR Code">
-
-            <p id="qrBatch"></p>
-
-        </div>
-
-    </div>
-
-
-    <script>
-
-        let batchId = localStorage.getItem("batchId");
-
-        let beekeeper = localStorage.getItem("beekeeper");
-
-        let location = localStorage.getItem("location");
-
-        let floral = localStorage.getItem("floral");
-
-        let harvestDate = localStorage.getItem("harvestDate");
-
-        let quantity = localStorage.getItem("quantity");
-
-        let moisture = localStorage.getItem("moisture");
-
-
-        document.getElementById("showBatchId").innerText =
-            batchId;
-
-        document.getElementById("showBeekeeper").innerText =
-            beekeeper;
-
-        document.getElementById("showLocation").innerText =
-            location;
-
-        document.getElementById("showFloral").innerText =
-            floral;
-
-        document.getElementById("showDate").innerText =
-            harvestDate;
-
-        document.getElementById("showQuantity").innerText =
-            quantity + " kg";
-
-        document.getElementById("showMoisture").innerText =
-            moisture + "%";
-
-
-        document.getElementById("qrBatch").innerText =
-            "Batch: " + batchId;
-
-
-        // Create QR code using the current batch ID
-
-        let verificationLink =
-            "https://example.com/verify.html?batch=" +
-            encodeURIComponent(batchId);
-
-
-        let qrURL =
-            "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
-            encodeURIComponent(verificationLink);
-
-
-        document.getElementById("qrImage").src = qrURL;
-
-    </script>
+</script>
 
 </body>
-
 </html>
